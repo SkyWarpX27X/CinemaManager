@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaManager.DBModels", "CinemaManager.DBModels\CinemaManager.DBModels.csproj", "{58E75FD9-E540-48B3-992F-C884E4E31457}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaManager.Common", "CinemaManager.Common\CinemaManager.Common.csproj", "{E8CD633E-B547-4B3E-B4D9-F7BB2318EB95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{58E75FD9-E540-48B3-992F-C884E4E31457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E75FD9-E540-48B3-992F-C884E4E31457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58E75FD9-E540-48B3-992F-C884E4E31457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8CD633E-B547-4B3E-B4D9-F7BB2318EB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8CD633E-B547-4B3E-B4D9-F7BB2318EB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8CD633E-B547-4B3E-B4D9-F7BB2318EB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8CD633E-B547-4B3E-B4D9-F7BB2318EB95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
