@@ -9,7 +9,7 @@ public class FilmDB
     public string Name { get; }
     public Genre Genre { get; }
     public int ReleaseYear { get; }
-    public int Duration { get; }
+    public int DurationInMinutes { get; }
 
     public FilmDB(string name, Genre genre, int releaseYear, int duration)
     {
@@ -17,6 +17,6 @@ public class FilmDB
         Name = name;
         Genre = genre;
         ReleaseYear = releaseYear;
-        Duration = duration;
+        DurationInMinutes = duration;
     }
 }

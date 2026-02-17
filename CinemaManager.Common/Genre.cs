@@ -8,6 +8,7 @@
         Drama,
         Fantasy,
         Action,
-        SciFi
+        SciFi,
+        Thriller,
     }
 }

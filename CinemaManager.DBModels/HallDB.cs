@@ -4,7 +4,7 @@ namespace CinemaManager.DBModels;
 
 public class HallDB
 {
-    //Id is generated once during creation and cannot be changed later
+    //Id is generated once during creation and cannot be changed
     public Guid Id  { get; }
     public string Name { get; set; }
     public int Seats { get; set; }

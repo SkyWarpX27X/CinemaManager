@@ -2,7 +2,7 @@
 
 public class SessionDB
 {
-    //Id is generated once during creation and cannot be changed later
+    //Id is generated once during creation and cannot be changed
     public Guid Id { get; }
     public Guid HallId  { get; set;  }
     //Session is created for specific film and it cannot be changed
