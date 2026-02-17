@@ -5,9 +5,9 @@ namespace CinemaManager.ConsoleApp;
 
 internal class Program
 {
-    internal enum AppState
+    private enum AppState
     {
-        Default,
+        MainMenu,
         HallInformation,
         End,
         Exit,
@@ -20,7 +20,7 @@ internal class Program
     {
         Console.WriteLine("Welcome to the Cinema Manager app!");
         _storageService = new StorageService();
-        _appState = AppState.Default;
+        _appState = AppState.MainMenu;
         string? command = null;
         while (_appState != AppState.Exit)
         {
@@ -29,34 +29,31 @@ internal class Program
                 case AppState.HallInformation:
                     HallInformation(command);
                     break;
-                case AppState.Default:
-                    DefaultState();
+                case AppState.MainMenu:
+                    MainMenu();
                     break;
             }
-            Console.WriteLine("Enter Exit to close application.");
+            Console.WriteLine("Enter exit to close application");
             command = Console.ReadLine();
             ProcessInput(command);
         }
     }
 
-    private static void DefaultState()
+    private static void MainMenu()
     {
-        LoadHalls();
+        if (_halls == null)
+        {
+            _halls = new List<HallUI>();
+            foreach (var hall in _storageService.GetAllHalls())
+            {
+                _halls.Add(new HallUI(hall));
+            }
+        }
         foreach (var hall in _halls)
         {
             Console.WriteLine(hall);
         }
-        Console.WriteLine("Enter hall name to see details.");
-    }
-
-    private static void LoadHalls()
-    {
-        if (_halls != null) return;
-        _halls = new List<HallUI>();
-        foreach (var hall in _storageService.GetAllHalls())
-        {
-            _halls.Add(new HallUI(hall));
-        }
+        Console.WriteLine("Enter hall name to see it's sessions");
     }
 
     private static void HallInformation(string? name)
@@ -68,18 +65,25 @@ internal class Program
             {
                 hallExists = true;
                 hall.LoadSessions(_storageService);
-                Console.WriteLine($"{hall.Name} sessions:");
-                foreach (var session in hall.Sessions)
+                if (hall.Sessions.Count == 0)
                 {
-                    Console.WriteLine(session);
+                    Console.WriteLine($"{hall.Name} doesn't have any sessions");
+                }
+                else
+                {
+                    Console.WriteLine($"{hall.Name} sessions:");
+                    foreach (var session in hall.Sessions)
+                    {
+                        Console.WriteLine(session);
+                    }
                 }
             }
         }
         if (!hallExists)
-            Console.WriteLine("Hall with that name does not exist.");
+            Console.WriteLine("Hall with that name does not exist");
         else
         {
-            Console.WriteLine("Enter Back to go to list of halls.");
+            Console.WriteLine("Enter back to go to list of halls");
             _appState = AppState.End;
         }
     }
@@ -89,20 +93,22 @@ internal class Program
         switch (command)
         {
             case "Exit":
+            case "exit":
                 _appState = AppState.Exit;
-                Console.WriteLine("Thanks for using the application!");
+                Console.WriteLine("Thanks for using the application");
                 break;
             case "Back":
-                _appState = AppState.Default;
+            case "back":    
+                _appState = AppState.MainMenu;
                 break;
             default:
-                if (_appState == AppState.Default)
+                if (_appState == AppState.MainMenu)
                 {
                     _appState = AppState.HallInformation;
                 }
                 else
                 {
-                    Console.WriteLine("Unknown command.");
+                    Console.WriteLine("Unknown command");
                 }
                 break;
         }
