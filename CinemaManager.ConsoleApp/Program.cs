@@ -18,7 +18,7 @@ internal class Program
     
     private static void Main(string[] args)
     {
-        Console.WriteLine("Welcome to the Cinema Manager app!");
+        Console.WriteLine("Welcome to the Cinema Manager app\n");
         _storageService = new StorageService();
         _appState = AppState.MainMenu;
         string? command = null;
@@ -53,7 +53,7 @@ internal class Program
         {
             Console.WriteLine(hall);
         }
-        Console.WriteLine("Enter hall name to see it's sessions");
+        Console.WriteLine("\nEnter hall name to see it's sessions");
     }
 
     private static void HallInformation(string? name)
@@ -83,7 +83,7 @@ internal class Program
             Console.WriteLine("Hall with that name does not exist");
         else
         {
-            Console.WriteLine("Enter back to go to list of halls");
+            Console.WriteLine("\nEnter back to go to list of halls");
             _appState = AppState.End;
         }
     }

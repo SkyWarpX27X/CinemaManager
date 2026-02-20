@@ -33,7 +33,7 @@ public class SessionUI
         get => _film;
         set
         {
-            if(_film == null) _film = value;
+            if(_dbModel == null) _film = value;
         }
     }
 
