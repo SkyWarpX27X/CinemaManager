@@ -9,6 +9,7 @@ internal class Program
     {
         MainMenu,
         HallInformation,
+        AllSessions,
         End,
         Exit,
     }
@@ -18,7 +19,7 @@ internal class Program
     
     private static void Main(string[] args)
     {
-        Console.WriteLine("Welcome to the Cinema Manager app!");
+        Console.WriteLine("Welcome to the Cinema Manager app\n");
         _storageService = new StorageService();
         _appState = AppState.MainMenu;
         string? command = null;
@@ -31,6 +32,9 @@ internal class Program
                     break;
                 case AppState.MainMenu:
                     MainMenu();
+                    break;
+                case AppState.AllSessions:
+                    AllSessions();
                     break;
             }
             Console.WriteLine("Enter exit to close application");
@@ -53,7 +57,8 @@ internal class Program
         {
             Console.WriteLine(hall);
         }
-        Console.WriteLine("Enter hall name to see it's sessions");
+        Console.WriteLine("\nEnter hall name to see it's sessions");
+        Console.WriteLine("Enter all to see all sessions");
     }
 
     private static void HallInformation(string? name)
@@ -83,34 +88,55 @@ internal class Program
             Console.WriteLine("Hall with that name does not exist");
         else
         {
-            Console.WriteLine("Enter back to go to list of halls");
+            Console.WriteLine("\nEnter back to go to list of halls");
             _appState = AppState.End;
         }
+    }
+
+    private static void AllSessions()
+    {
+        foreach (var hall in _halls)
+        {
+            hall.LoadSessions(_storageService);
+            foreach (var session in hall.Sessions)
+            {
+                Console.WriteLine(session);
+            }
+        }
+        Console.WriteLine("\nEnter back to go to list of halls");
     }
     
     private static void ProcessInput(string? command)
     {
-        switch (command)
+        if (command == "Exit" ||  command == "exit")
         {
-            case "Exit":
-            case "exit":
-                _appState = AppState.Exit;
-                Console.WriteLine("Thanks for using the application");
-                break;
-            case "Back":
-            case "back":    
-                _appState = AppState.MainMenu;
-                break;
-            default:
-                if (_appState == AppState.MainMenu)
+            _appState = AppState.Exit;
+            Console.WriteLine("Thanks for using the application");
+        }
+        else
+        {
+            if (_appState == AppState.MainMenu)
+            {
+                if (command == "All" || command == "all")
+                {
+                    _appState = AppState.AllSessions;
+                }
+                else
                 {
                     _appState = AppState.HallInformation;
+                }
+            }
+            else
+            {
+                if (command == "Back" || command == "back")
+                {
+                    _appState = AppState.MainMenu;
                 }
                 else
                 {
                     Console.WriteLine("Unknown command");
                 }
-                break;
+            }
         }
     }
     
